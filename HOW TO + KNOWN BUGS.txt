@@ -1,0 +1,84 @@
+Sommaire :
+1 : Knows bugs
+2 : Installation
+3 : How to …
+
+##################################################################
+
+BUGS / PAS FAIT
+Franck :
+- pas eu le temps de faire les vérifs en back pour le paiement de l'abonnement
+- pas eu le temps de faire la gestion des abonnements en admin (donc pour changer la validité de l'abo et faire le test du role SUBSCRIBED, faut le faire directement dans la bdd)
+fin du travail dans la nuit de vendredi à samedi. Impossible de continuer le weekend. voir DM discord.
+- aucun travail en lien avec les livres
+
+
+Lydie :
+- l'agenda ne s'affiche pas au 1er chargement de la page. Il faut refresh.
+- dans la partie admin, la gestion des équipements n'est pas fonctionnel (sur la gestion des salles et des équipements)
+weekend chargé, donc pas eu le temps de travailler
+
+Alex :
+?
+
+##################################################################
+
+INSTALLATION :
+- Installer la base de donnée fournie.
+- clone le projet.
+- composer install
+
+Si pas d'installation de base de donnée :
+- clone le projet
+- symfony console make:migration
+- symfony console d:s:u --force
+
+Dans tous les cas :
+- enjoy!
+
+CE QUI MARCHE :
+USER
+- enregistrer un nouvel utilisateur
+- s'identifier
+- se déconnecter
+- prendre un abonnement dans le pannel "Mon compte". Si l'abonnement expire, à la connexion de l'utilisateur, son status 'abonné' est enlevé et il n'a donc plus accès aux pages qui nécessite un abonnement. Il peut reprendre un abonnement.
+- consulter l'historique des réservations de salle dans la partie "Mon compte".
+SALLES
+- Consulter la liste des salles (depuis la navbar)
+- voir le planning des salles (refresh la page si le planning se s'affiche pas dans le détail)
+- un clic sur une heure réserve à cet utilisateur le créneau. Un clic-glissé réserve plusieurs heures. Un clic sur un créneau déjà réservé pour éditer la durée ou le supprimer.
+LIVRES
+-
+
+
+ADMIN:
+- Admin User : consulter la liste d'user, modifier nom, prénom, adresse, code postal, ville, numéro de tel et date de naissance, supprimer l'utilisateur (pas eu le temps de faire le ban user)
+- Admin Salles : consulter la liste des salles, modifier les infos de la salle (à l'exception des équipements dont la modification n'est pas prise en compte), supprimer la salle, créer une salle (choix de l'équipement ne marche pas), voir réservation de salle (aucune intéraction possible) 
+- Admin livres :
+
+!!!!! LA PAGE EN MULTILANGUE EST LA HOMEPAGE !!!!!
+
+
+
+##################################################################
+
+HOW TO :
+
+Si tu as importé la base de donnée :
+login admin pour accéder au backoffice
+test@test.fr:123456
+
+Nos migrations marchent, mais pour les salles que Lydie a créée et qui sont en dur dans la base de données (pas faites en fixtures) on fournit la base de données. Tu peux vérifier les migrations avant, mais il faudra malheureusement import la bdd pour avoir la liste des salles. Sinon tu peux créer des salles dans le backoffice.
+
+Si tu ne fais pas d'import de bdd, après avoir crée l'user, il faut mettre le role à jour dans phpMyAdmin avec :
+[
+    "ROLE_USER",
+    "ROLE_ADMIN"
+]
+
+Normalement ça devrait marcher.
+
+
+Les routes sont bloquées depuis le security.yaml et certaines directement sur le controller.
+
+
